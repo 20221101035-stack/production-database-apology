@@ -17,6 +17,9 @@ def main() -> None:
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
         f.write(ENTRY + "\n")
+    # Verify the bytes landed exactly as intended before exiting.
+    with open(os.path.join(out_dir, "entry.txt"), encoding="utf-8") as f:
+        assert f.read() == ENTRY + "\n", "entry.txt does not match the entry"
 
 
 if __name__ == "__main__":
